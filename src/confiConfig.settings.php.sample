@@ -1,0 +1,74 @@
+<?php
+return array(
+
+    /**
+     * ConfiConfig Settings
+     * NOTE: only compatible with 'ini', 'json', 'php', 'xml', and 'properties' config file extensions
+     */
+
+    /**
+     * 'use_compiled_config' - When true, confiConfig will return the compiled config if found, otherwise it will crete
+     * the compiled config and then return it. When false, confiConfig will always regenerate the compiled config. This
+     * is useful in dev environments where config variables may change often. If this key is not set, the default value
+     * of 'true' will be used.
+     */
+    'use_compiled_config' => true,
+
+    /**
+     * 'compiled_config_ttl' - Sets how long ConfiConfig will use the compiled config before regenerating. This is
+     * regardless of whether a cache service is being used. If this key is not set, the default value of 86400 will
+     * be used
+     */
+    'compiled_config_ttl' => 86400, //86400 = one day
+
+    /**
+     * 'compiled_config_location' - Location where the compiledConfig file will be written to and read from. This
+     * location will need to be editable by the PHP service. If this key is not set ConfiConfig will attempt to create
+     * the file in the document root
+     */
+    'compiled_config_location' => '../data/compiledConfig',
+
+    /**
+     * 'environment_specific_config_suffixes' - Anytime a config file is found, confiConfig will load it, and then check
+     * for, and attempt to load, similarly named files with the suffixes in this list. If the found config file contains
+     * the suffix from this list it is skipped. This ensures that global checked in configs are loaded first and
+     * environment specific configs are then merged in on top.
+     *
+     * ~example~
+     * Assumption: There are 2 config files in a folder to load. main.json and main.local.json and the
+     * environment_specific_config_suffixes array contains 'local' and 'production'.  When ConfiConfig reads main.json
+     * it will then look for main.local.json and main.production.json in the same folder to merge over top. If
+     * ConfiConfig read main.local.json first, it would recognize the .local suffix and would not load the file making
+     * the assumption that a similarly named file without the suffix will be read. Note, suffix needs to be delimited
+     * by a '.'  sample.local.json will only be read as an environment specific config. samplelocal.json will be read as
+     * a global config and the application will look for a samplelocal.local.json config to override it.
+     */
+    'environment_specific_config_suffixes' => array(
+        'local',
+    ),
+
+    /**
+     * 'config_paths' - The paths of specific config files to load.
+     */
+    'config_paths' => array(
+        '../src/settings.php'
+    ),
+
+    /**
+     * 'config_folders' - each key of the config folder array represents the path that should be checked for config
+     * files. The value should be an array with an 'include' key that holds glob patterns (libc glob()) for
+     * matching files to include. If no 'include' key is specified, ConfiConfig will attempt to include all
+     * files in the folder with the following extensions: 'ini', 'json', 'xml', 'properties'.
+     * The folder search is NOT recursive
+     *
+     */
+    'config_folders' => array(
+        '../config' => array(),
+        '../data/example/config' => array(
+            'include'=>array(
+                '*.ini',
+                '*.json',
+            ),
+        ),
+    ),
+);

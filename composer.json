@@ -1,0 +1,20 @@
+{
+    "name": "yafa11/ConfiConfig",
+    "description": "Config file compilers. Bring your configs together",
+    "keywords": ["config","configuration"],
+    "homepage": "https://github.com/yafa11/ConfiConfig",
+    "license": "MIT",
+
+    "require": {
+        "php": ">=5.5.0",
+        "zendframework/zend-config": "2.6.0",
+        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+        "zendframework/zend-json": "^2.6.1"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "ConfiConfig\\": "src/"
+        }
+    }
+}
