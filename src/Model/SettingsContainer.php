@@ -16,6 +16,8 @@ class SettingsContainer
     private $config_paths;
     /** @var  array */
     private $config_folders;
+    /** @var  string */
+    private $cache_key;
 
 
     public function __construct()
@@ -27,6 +29,7 @@ class SettingsContainer
         $this->environment_specific_config_suffixes = array();
         $this->config_paths = array();
         $this->config_folders = array();
+        $this->cache_key = 'confiConfig_cached_config';
     }
 
     /**
@@ -132,4 +135,19 @@ class SettingsContainer
         return get_object_vars($this);
     }
 
+    /**
+     * @return string
+     */
+    public function getCacheKey()
+    {
+        return $this->cache_key;
+    }
+
+    /**
+     * @param string $cache_key
+     */
+    public function setCacheKey($cache_key)
+    {
+        $this->cache_key = $cache_key;
+    }
 }

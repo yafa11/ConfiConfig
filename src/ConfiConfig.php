@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ConfiConfig;
-
 
 use ConfiConfig\Model\SettingsContainer;
 use Psr\Cache\CacheItemPoolInterface;

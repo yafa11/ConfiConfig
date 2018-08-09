@@ -9,21 +9,24 @@ return array(
     /**
      * 'use_compiled_config' - When true, confiConfig will return the compiled config if found, otherwise it will crete
      * the compiled config and then return it. When false, confiConfig will always regenerate the compiled config. This
-     * is useful in dev environments where config variables may change often. If this key is not set, the default value
-     * of 'true' will be used.
+     * is useful in dev environments where config variables may change often. In production environments this should
+     * always be "true" as the act of creating the compiled config is resource intensive.
+     *
+     * Value defaults to 'true' if not set
      */
     'use_compiled_config' => true,
 
     /**
      * 'compiled_config_ttl' - Sets how long ConfiConfig will use the compiled config before regenerating. This is
-     * regardless of whether a cache service is being used. If this key is not set, the default value of 86400 will
-     * be used
+     * regardless of whether a cache service is being used.
+     *
+     * Value defaults to '86400' if not set
      */
     'compiled_config_ttl' => 86400, //86400 = one day
 
     /**
      * 'compiled_config_location' - Location where the compiledConfig file will be written to and read from. This
-     * location will need to be editable by the PHP service. If this key is not set ConfiConfig will attempt to create
+     * location will need write access by the PHP service. If this key is not set ConfiConfig will attempt to create
      * the file in the document root
      */
     'compiled_config_location' => '../data/compiledConfig',
@@ -71,4 +74,10 @@ return array(
             ),
         ),
     ),
+
+    /**
+     * 'cache_key' - If using a cache service, the value set here will be the name of the key where the compiled config
+     * is persisted. If not set, the default value is 'confiConfig_cached_config'
+     */
+     'cache_key' => 'confiConfig_cached_config',
 );
